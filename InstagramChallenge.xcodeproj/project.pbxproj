@@ -14,6 +14,7 @@
 		CB090712195DBF8100A4A196 /* MediaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB090711195DBF8100A4A196 /* MediaDetailViewController.m */; };
 		CB09072B195F1CBA00A4A196 /* Storyboard~iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB090729195F1CBA00A4A196 /* Storyboard~iPad.storyboard */; };
 		CB09072C195F1CBA00A4A196 /* Storyboard~iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB09072A195F1CBA00A4A196 /* Storyboard~iPhone.storyboard */; };
+		CB5E9ED21960B33F0047CC0D /* HintHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5E9ED11960B33F0047CC0D /* HintHelper.m */; };
 		CB80F2281950A46700E781D9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB80F2271950A46700E781D9 /* Foundation.framework */; };
 		CB80F22A1950A46700E781D9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB80F2291950A46700E781D9 /* CoreGraphics.framework */; };
 		CB80F22C1950A46700E781D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB80F22B1950A46700E781D9 /* UIKit.framework */; };
@@ -40,6 +41,8 @@
 		CB090711195DBF8100A4A196 /* MediaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaDetailViewController.m; sourceTree = "<group>"; };
 		CB090729195F1CBA00A4A196 /* Storyboard~iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Storyboard~iPad.storyboard"; sourceTree = "<group>"; };
 		CB09072A195F1CBA00A4A196 /* Storyboard~iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Storyboard~iPhone.storyboard"; sourceTree = "<group>"; };
+		CB5E9ED01960B33F0047CC0D /* HintHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HintHelper.h; sourceTree = "<group>"; };
+		CB5E9ED11960B33F0047CC0D /* HintHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HintHelper.m; sourceTree = "<group>"; };
 		CB80F2241950A46700E781D9 /* InstagramChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB80F2271950A46700E781D9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CB80F2291950A46700E781D9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -88,6 +91,7 @@
 		CB090707195CCB5600A4A196 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CB5E9ECF1960B3250047CC0D /* Helper */,
 				CB090708195CCB6900A4A196 /* UI */,
 			);
 			name = Views;
@@ -117,6 +121,15 @@
 				CB090711195DBF8100A4A196 /* MediaDetailViewController.m */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		CB5E9ECF1960B3250047CC0D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CB5E9ED01960B33F0047CC0D /* HintHelper.h */,
+				CB5E9ED11960B33F0047CC0D /* HintHelper.m */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		CB80F21B1950A46700E781D9 = {
@@ -263,6 +276,7 @@
 				CB919182195B410F008EB202 /* Constants.m in Sources */,
 				CB09070B195CCBA100A4A196 /* IGButton.m in Sources */,
 				CB0906B3195C4C5C00A4A196 /* MediaData.m in Sources */,
+				CB5E9ED21960B33F0047CC0D /* HintHelper.m in Sources */,
 				CB09070F195CE49900A4A196 /* MediaTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

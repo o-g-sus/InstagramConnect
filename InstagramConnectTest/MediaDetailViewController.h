@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "MediaData.h"
+#import <MessageUI/MessageUI.h>
 
-@interface MediaDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface MediaDetailViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) MediaData *mediaData;
 

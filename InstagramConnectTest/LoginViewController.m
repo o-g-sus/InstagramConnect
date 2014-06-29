@@ -39,7 +39,7 @@
     [super viewDidLoad];
     
     self.title = @"Login/Select";
-
+    
     [self checkLoggedIn];
 }
 
@@ -77,7 +77,7 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
     NSString* urlString = [[request URL] absoluteString];
-
+    
     if ([urlString hasPrefix:kOAuth2RedirectURL]) {
         NSRange tokenParam = [urlString rangeOfString: @"access_token="];
         if (tokenParam.location != NSNotFound) {
@@ -91,7 +91,7 @@
             NSLog(@"access token %@ %lu", token, (unsigned long)[token length]);
             if ([token length] > 0 ) {
                 _accessToken = token;
-            
+                
                 NSString* redirectUrl = [[NSString alloc] initWithFormat:@"%@?access_token=%@", kOAuth2Endpoint_users_self, _accessToken];
                 NSLog(@"%@ - redirectUrl %@", NSStringFromClass([self class]), redirectUrl );
                 [self showMediaListButtons];

@@ -44,57 +44,6 @@
 }
 
 
-#pragma mark - image loading
-
-// TODO improve loading
-/*
-- (void)requestImages
-{
-    [HSInstagramUserMedia getUserMediaWithId:@"self" withAccessToken:self.accessToken block:^(NSArray *records) {
-        self.images = records;
-        int item = 0, row = 0, col = 0;
-        //NSLog(@"%@ - records %@ ", NSStringFromClass([self class]) , records);
-        
-        for (NSDictionary* image in records) {
-            UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(col*kthumbnailWidth,
-                                                                          row*kthumbnailHeight,
-                                                                          kthumbnailWidth,
-                                                                          kthumbnailHeight)];
-            button.tag = item;
-            [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            ++col;++item;
-            if (col >= kImagesPerRow) {
-                row++;
-                col = 0;
-            }
-            [self.gridScrollView addSubview:button];
-            [self.thumbnails addObject:button];
-        }
-        [self loadImages];
-    }];
-}
-
-- (void)loadImages
-{
-    int item = 0;
-    
-    for (HSInstagramUserMedia* media in self.images) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-            NSString* thumbnailUrl = media.thumbnailUrl;
-            NSData* data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:thumbnailUrl]];
-            UIImage* image = [UIImage imageWithData:data];
-            
-            dispatch_async(dispatch_get_main_queue(), ^ {
-                UIButton* button = [self.thumbnails objectAtIndex:item];
-                [button setImage:image forState:UIControlStateNormal];
-            });
-        });
-        ++item;
-    }
-}
-*/
-
-
 
 #pragma mark - Table view data source
 
@@ -129,46 +78,35 @@
     cell.LikesNo.text = [NSString stringWithFormat:@"Likes: %lu",(unsigned long)imageData.likes];
     
     // @Annotation
-    // Image loading takes some time ... so load them in another thread is a good idea
-
+    // Image loading takes some time - so load them in another thread is a good idea:
+    // One option is to use GCD for that. Another option would be, to use ADNetworking, which has already
+    // an asynchrone ImageLoader build in (AFImageResponseSerializer).
+    // But our networking jobs are still rather simple, so GCD is enough here
+    
     //NSURL * imageURL = [NSURL URLWithString:imageData.imageLowResUrl];
     //NSData * imgData = [NSData dataWithContentsOfURL:imageURL];
     //cell.mediaImage.image = [UIImage imageWithData:imgData];
     
     dispatch_queue_t imageQueue = dispatch_queue_create("Image Loader",NULL);
-
+    
     dispatch_async(imageQueue, ^{
-        // TODO replace with thumbnail images again
         NSURL * url = [NSURL URLWithString:imageData.imageThumbnailUrl];
-        //NSURL *url = [NSURL URLWithString:imageData.imageStandardUrl];
         NSData *imageData = [NSData dataWithContentsOfURL:url];
-            
         if (!imageData) return;
-            
         dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
+            // Update  UI
             cell.mediaImage.image = [UIImage imageWithData:imageData];
         });
     });
     
-    // TODO: save Images on Device for faster loading, offlibe watching ?
+    // TODO: save Images on Device for faster loading, offline use ?
     
     return cell;
 }
 
 
-#pragma mark - Table view delegate
+#pragma mark - Storyboard
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -176,8 +114,7 @@
     {
         MediaDetailViewController *detailViewController = [segue destinationViewController];
         
-        NSIndexPath *myIndexPath = [self.tableView
-                                    indexPathForSelectedRow];
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         //NSLog(@"%@ - row %li ", NSStringFromClass([self class]), (long)myIndexPath.row );
         
